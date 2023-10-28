@@ -1,10 +1,11 @@
-import Hero from "@/app/components/Hero";
-import SearchBox from "@/app/components/SearchBox";
-import Sidebar from "@/app/components/Sidebar";
-import TwoColumnLayout from "@/app/components/TwoColumnLayout";
 import React from "react";
+import SearchBox from "@/app/components/SearchBox";
+import TwoColumnLayout from "@/app/components/TwoColumnLayout";
+import Sidebar from "@/app/components/Sidebar";
+import Hero from "@/app/components/Hero";
+import Image from "next/image";
 
-const ChatBuddy = () => {
+function PdfSearch() {
   return (
     <>
       <TwoColumnLayout
@@ -12,7 +13,7 @@ const ChatBuddy = () => {
           <>
             <Sidebar />
             <Hero
-              title="ASK BUDDY"
+              title="PDF SEARCH"
               paragraph="Nobody likes waiting for APIs to load. Use streaming to improve the user experience of chat bots. This tutorial uses streaming. Head over to Module X to get started! Nobody likes waiting for APIs to load. Use streaming to improve the user experience of chat bots. This tutorial uses streaming. Head over to Module X to get started!
               "
               buttonText="Upload"
@@ -21,12 +22,13 @@ const ChatBuddy = () => {
         }
         rightChildren={
           <>
+            <Image width={400} height={0} alt="" src="/assets/pngegg 2.svg" />
             <SearchBox />
           </>
         }
       />
     </>
   );
-};
+}
 
-export default ChatBuddy;
+export default PdfSearch;
