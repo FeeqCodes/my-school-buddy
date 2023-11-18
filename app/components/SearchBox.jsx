@@ -6,7 +6,7 @@ const SearchBox = () => {
     <>
       {/* Box */}
       <div
-        style={{ backgroundColor: "rgba(255, 255, 255, 0.63)" }}
+        style={{ backgroundColor: "rgba(255, 255, 255, 0.83)" }}
         className="z-[10] absolute w-[30vw] h-[70vh] p-[2rem] flex items-end rounded-[15px]  shadow-inner shadow-gray-900"
       >
         <div className="relative w-full h-auto  justify-items-end">

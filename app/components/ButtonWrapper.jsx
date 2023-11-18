@@ -4,9 +4,9 @@
 import React from 'react'
 import Button from './Button'
 
-const ButtonWrapper = ({buttonText}) => {
+const ButtonWrapper = ({buttonText, display}) => {
   return (
-    <button className="relative h-[15rem] bg-transparent">
+    <button className={`relative h-[15rem] bg-transparent ${display} `}>
       <Button
         text="text-transparent"
         blur=""

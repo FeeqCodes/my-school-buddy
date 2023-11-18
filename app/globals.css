@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 body {
-height:100%  ;
+  height:100%  ;
 
-background-image: linear-gradient( to bottom right, #480061, black);
-  
+  background-color: rgba(21, 6, 27, 1); 
 }
+
+
 
 

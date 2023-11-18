@@ -1,5 +1,15 @@
-import { Press_Start_2P, Source_Code_Pro } from "next/font/google";
+import { Love_Ya_Like_A_Sister } from "next/font/google";
 import localFont from "next/font/local";
+
+
+
+
+const loveYa = Love_Ya_Like_A_Sister({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-loveYa"
+});
+
 
 
 const airStrikeBold = localFont({
@@ -13,4 +23,15 @@ const airStrikeLaser = localFont({
   variable: "--font-airLaser",
 });
 
-export {  airStrikeBold, airStrikeLaser };
+
+
+const corleoneDue = localFont({
+  src: "./CorleoneDue.ttf",
+  variable: "--font-corleone",
+});
+
+
+
+
+
+export {  airStrikeBold, airStrikeLaser, loveYa, corleoneDue };

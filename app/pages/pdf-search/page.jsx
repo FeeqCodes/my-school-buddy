@@ -17,6 +17,7 @@ function PdfSearch() {
               paragraph="Nobody likes waiting for APIs to load. Use streaming to improve the user experience of chat bots. This tutorial uses streaming. Head over to Module X to get started! Nobody likes waiting for APIs to load. Use streaming to improve the user experience of chat bots. This tutorial uses streaming. Head over to Module X to get started!
               "
               buttonText="Upload"
+              display="block"
             />
           </>
         }

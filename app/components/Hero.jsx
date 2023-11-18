@@ -8,7 +8,7 @@ import ButtonWrapper from './ButtonWrapper';
 
 
 
-const Hero = ({  title, paragraph, buttonText }) => {
+const Hero = ({  title, paragraph, buttonText, display }) => {
   return (
     <>
       {/* Content */}
@@ -16,7 +16,7 @@ const Hero = ({  title, paragraph, buttonText }) => {
         <div className="">
           <h1
             style={{ color: "rgba(255, 255, 255, 0.72)" }}
-            className="font-airStrike text-[7vw] leading-[100%] mb-[2rem]"
+            className=" text-[8vw] leading-[100%] my-[2rem] font-loveYa"
           >
             {" "}
             {title}
@@ -28,6 +28,7 @@ const Hero = ({  title, paragraph, buttonText }) => {
         <div className="mt-10">
           <ButtonWrapper
             buttonText={buttonText}  
+            display={display}
           />
         </div>
       </div>

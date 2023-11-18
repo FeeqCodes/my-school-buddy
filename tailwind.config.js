@@ -16,7 +16,8 @@ module.exports = {
       fontFamily: {
         airStrike: ["var(--font-air)"],
         airLaser: ["var(--font-airLaser)"],
-        // press: ["var(--font-press)"],
+        loveYa: ["var(--font-loveYa)"],
+        corleone: ["var(--font-corleone)"],
       },
     },
   },
