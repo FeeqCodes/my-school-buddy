@@ -18,6 +18,7 @@ module.exports = {
         airLaser: ["var(--font-airLaser)"],
         loveYa: ["var(--font-loveYa)"],
         corleone: ["var(--font-corleone)"],
+        poppins: ["var(--font-poppins)"],
       },
     },
   },

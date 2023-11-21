@@ -1,17 +1,24 @@
-import { Love_Ya_Like_A_Sister } from "next/font/google";
+import { Love_Ya_Like_A_Sister,Poppins } from "next/font/google";
 import localFont from "next/font/local";
 
 
 
-
+// Google Fonts
 const loveYa = Love_Ya_Like_A_Sister({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-loveYa"
 });
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 
+
+
+// Variable Fonts
 const airStrikeBold = localFont({
   src: "./airstrikebold.ttf",
   variable: "--font-air"
@@ -34,4 +41,4 @@ const corleoneDue = localFont({
 
 
 
-export {  airStrikeBold, airStrikeLaser, loveYa, corleoneDue };
+export {  airStrikeBold, airStrikeLaser, loveYa, corleoneDue, poppins };

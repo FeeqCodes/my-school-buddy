@@ -4,12 +4,9 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 // Fonts
-import { airStrikeBold, airStrikeLaser, corleoneDue, loveYa } from "./styles/fonts";
+import { airStrikeBold, airStrikeLaser, corleoneDue, loveYa, poppins } from "./styles/fonts";
 
 
-const inter = Inter({
-  subsets: ["latin"],
-});
 
 
 export const metadata = {
@@ -25,14 +22,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={` ${loveYa.variable} ${corleoneDue.variable} `}
+        className={` ${loveYa.variable} ${corleoneDue.variable}, ${poppins.variable} `}
       >
         <main className="text-white">
           {/* Absolute items */}
           <div className=" absolute  w-[100%] h-[100vh] blur-[150px]">
             <div className="absolute top-[10%] w-[450px] right-[10%] h-[450px] bg-[#6107A8]  "></div>
             <div className="absolute top-0 w-[500px] left-[10%] h-[500px] bg-[#092AA1]  rounded-full"></div>
-            <div className="absolute top-[-20%] w-[450px] left-[30%] h-[450px] bg-[#CACACA]  rounded-full"></div>
+            <div className="absolute top-[-20%] w-[450px] left-[30%] h-[450px] bg-[#120f0f]  rounded-full"></div>
             <div className="absolute top-[30%] w-[500px] left-[30%] h-[500px] bg-[#1A223F]  rounded-full"></div>
             
           </div>

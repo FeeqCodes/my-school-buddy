@@ -1,10 +1,36 @@
-import Hero from "@/app/components/Hero";
-import SearchBox from "@/app/components/SearchBox";
-import Sidebar from "@/app/components/Sidebar";
-import TwoColumnLayout from "@/app/components/TwoColumnLayout";
-import React from "react";
+
+'use client'
+
+
+import Hero from "../../components/Hero"
+import SearchBox from "../../components/SearchBox";
+import Sidebar from "../../components/Sidebar";
+import TwoColumnLayout from "../../components/TwoColumnLayout";
+import React, { useState } from "react";
+
+import Image from "next/image";
+
+
+
+
 
 const ChatBuddy = () => {
+  // const [loading, setLoading] = useState(false);
+
+  const [messages, setMessages] = useState([
+    {
+      text: "Hi there! What will you like to search for today",
+      type: "bot",
+    },
+    
+   
+    
+  ]);
+
+  // setMessages()
+
+// console.log(messages.text)
+
   return (
     <>
       <TwoColumnLayout
@@ -13,8 +39,7 @@ const ChatBuddy = () => {
             <Sidebar />
             <Hero
               title="ASK BUDDY"
-              paragraph="Nobody likes waiting for APIs to load. Use streaming to improve the user experience of chat bots. This tutorial uses streaming. Head over to Module X to get started! Nobody likes waiting for APIs to load. Use streaming to improve the user experience of chat bots. This tutorial uses streaming. Head over to Module X to get started!
-              "
+              paragraph="Embark on a transformative academic journey with our decentralized AI platform, crafted exclusively for students. Revolutionize your learning experience as cutting-edge AI tools converge in a decentralized space, putting knowledge at your fingertips. Explore the future of education, where individualized assistance meets the power of decentralization "
               buttonText="Upload"
               display="hidden"
             />
@@ -22,10 +47,21 @@ const ChatBuddy = () => {
         }
         rightChildren={
           <>
-            <SearchBox />
+            <div className="relative">
+              <Image
+                width={400}
+                height={0}
+                alt=""
+                src="/assets/pngegg 2.svg"
+                className="absolute top-0 blur"
+              />
+
+              <SearchBox messages={messages} />
+            </div>
           </>
         }
       />
+      <div></div>
     </>
   );
 };

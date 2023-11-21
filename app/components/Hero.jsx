@@ -16,12 +16,12 @@ const Hero = ({  title, paragraph, buttonText, display }) => {
         <div className="">
           <h1
             style={{ color: "rgba(255, 255, 255, 0.72)" }}
-            className=" text-[8vw] leading-[100%] my-[2rem] font-loveYa"
+            className=" text-[9vw] leading-[100%] my-[2rem] font-loveYa"
           >
             {" "}
             {title}
           </h1>
-          <p className="">{paragraph}</p>
+          <p className="font-poppins text-[18px] ]">{paragraph}</p>
         </div>
 
       {/* Button */}

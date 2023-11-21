@@ -13,7 +13,7 @@ const Sidebar = () => {
   return (
     <div
       style={{ backgroundColor: "rgba(255, 255, 255, 0.63)" }}
-      className="w-[18rem]  rounded-[10px]   items-center justify-between h-[60vh]  shadow-md drop-shadow-2xl shadow-black border border-white   relative"
+      className="static top-[10vh] w-[20rem]  rounded-[10px]   items-center justify-between h-[60vh]  shadow-md drop-shadow-2xl shadow-black border border-white   "
     >
       <div className="rounded-[10px] w-full h-full absolute bg-[#15061B] backdrop-blur-lg blur-sm "></div>
 
