@@ -1,14 +1,16 @@
+import React from "react";
+import ButtonWrapper from "./ButtonWrapper";
+import Input from "./Input"
 
-import React from 'react'
-import Button from './Button';
-import ButtonWrapper from './ButtonWrapper';
-
-
-
-
-
-
-const Hero = ({  title, paragraph, buttonText, display }) => {
+const Hero = ({
+  title,
+  paragraph,
+  buttonText,
+  display,
+  handleFileChange,
+  fileInputRef,
+  handleButtonClick,
+}) => {
   return (
     <>
       {/* Content */}
@@ -24,16 +26,22 @@ const Hero = ({  title, paragraph, buttonText, display }) => {
           <p className="font-poppins text-[18px] ]">{paragraph}</p>
         </div>
 
-      {/* Button */}
-        <div className="mt-10">
+        {/* Button/Input */}
+        <div className="mt-10 flex">
+          <Input
+          fileInputRef={fileInputRef}
+            handleFileChange={handleFileChange}
+            
+          />
           <ButtonWrapper
-            buttonText={buttonText}  
+            buttonText={buttonText}
+            handleButtonClick={handleButtonClick}
             display={display}
           />
         </div>
       </div>
     </>
   );
-}
+};
 
-export default Hero
+export default Hero;
