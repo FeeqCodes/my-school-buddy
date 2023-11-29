@@ -1,10 +1,11 @@
 import React from "react";
-import Sidebar from "./components/Sidebar";
-import Hero from "./components/Hero";
-import SearchBox from "./components/SearchBox";
-import TwoColumnLayout from "./components/TwoColumnLayout";
-import Button from "./components/Button";
+import Sidebar from "../components/Sidebar";
+import Hero from "../components/Hero";
+import SearchBox from "../components/SearchBox";
+import TwoColumnLayout from "../components/TwoColumnLayout";
+import Button from "../components/Button";
 import Image from "next/image";
+import PopUp from "../components/PopUp";
 
 function Home() {
   return (
@@ -28,6 +29,8 @@ function Home() {
           </>
         }
       />
+
+    
     </>
   );
 }

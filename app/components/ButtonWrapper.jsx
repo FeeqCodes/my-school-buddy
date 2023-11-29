@@ -11,14 +11,14 @@ const ButtonWrapper = ({buttonText, display}) => {
         text="text-transparent"
         blur=""
         bg="bg-white"
-        top="top-[5px]"
+        top="top-[0px]"
         buttonText={buttonText}
       />
 
       <Button
         text="text-black"
         bg="bg-white"
-        top="top-[0]"
+        top="top-[-5px]"
         buttonText={buttonText}
       />
     </button>

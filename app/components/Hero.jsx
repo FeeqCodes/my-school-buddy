@@ -12,7 +12,7 @@ const Hero = ({  title, paragraph, buttonText, display }) => {
   return (
     <>
       {/* Content */}
-      <div className={`flex flex-col justify-between gap-5 text-white `}>
+      <div className={`flex flex-col justify-between gap-3 text-white w-[85%]`}>
         <div className="">
           <h1
             style={{ color: "rgba(255, 255, 255, 0.72)" }}
