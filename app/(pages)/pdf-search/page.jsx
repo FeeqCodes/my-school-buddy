@@ -31,7 +31,7 @@ function PdfSearch() {
   const [firstMsg, setFirstMsg] = useState(true);
 
   // selecting file
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState();
 
   // handle endpoint
   const [ endPoint, setEndPoint ] = useState([
@@ -59,6 +59,8 @@ function PdfSearch() {
     const file = e.target.files[0];
 
     setSelectedFile(file);
+
+    // handleBackendLogic()
   };
 
 
@@ -84,6 +86,17 @@ function PdfSearch() {
       console.log(searchRes);
 
       setError("");
+
+      if (selectedFile) {
+        toast("Uploaded Successfully!", {
+          position: toast.POSITION.TOP_LEFT,
+          className: "foo-bar",
+        });
+
+        console.log(selectedFile);
+      } 
+
+
     } catch (e) {
       console.error(e);
     }
@@ -92,16 +105,11 @@ function PdfSearch() {
 
   // Get the latest data
   useEffect(() => {
+    // Call handleBackendLogic only if selectedFile is defined
     if (selectedFile) {
-      toast("Uploaded Successfully!", {
-        position: toast.POSITION.TOP_LEFT,
-        className: "foo-bar",
-      });
-
-      console.log(selectedFile)
+      handleBackendLogic();
     }
-    handleBackendLogic();
-  }, [selectedFile]);
+  }, [selectedFile]); 
 
 
 
