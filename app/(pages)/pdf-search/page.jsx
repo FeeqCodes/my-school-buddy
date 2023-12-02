@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import SearchBox from "../../components/SearchBox";
 import TwoColumnLayout from "../../components/TwoColumnLayout";
@@ -33,6 +33,8 @@ function PdfSearch() {
   // selecting file
   const [selectedFile, setSelectedFile] = useState(null);
 
+
+
   /**
    * whenever the promptBox value changes
    */
@@ -40,54 +42,69 @@ function PdfSearch() {
     setPrompt(e.target.value);
   };
 
+  
   /**
    * when we select a file
    */
-
   const fileInputRef = useRef(null);
 
   // The input
-  const handleFileChange =  (e)=> {
-    const file =  e.target.files[0];
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
 
-    setSelectedFile(file)
+    setSelectedFile(file);
+  };
 
-    toast("Uploaded Successfully!", {
-      position: toast.POSITION.TOP_LEFT,
-      className: "foo-bar"
-    });
-  }
 
+  // HAndle The Logic
+  const handleBackendLogic = async () => {
+
+
+    try {
+      const data = new FormData();
+      data.set("file", selectedFile);
+
+      const response = await fetch("api/pdf-upload", {
+        method: "POST",
+        body: data,
+      });
+
+      fileInputRef.current && (fileInputRef.current.value = "");
+
+      console.log("Submitted");
+
+      // Get response from the backend
+      const searchRes = await response.json();
+      console.log(searchRes);
+
+      setError("");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+
+  // Get the latest data
+  useEffect(() => {
+    if (selectedFile) {
+      // toast("Uploaded Successfully!", {
+      //   position: toast.POSITION.TOP_LEFT,
+      //   className: "foo-bar",
+      // });
+
+      console.log(selectedFile)
+    }
+    handleBackendLogic();
+  }, [selectedFile]);
+
+
+
+  // Trigger a click on the hidden file input
   const handleButtonClick = () => {
-    // Trigger a click on the hidden file input
     fileInputRef.current.click();
   };
 
-  // const handleFileChange =  (e)=> {
-  //   const file =  e.target.files[0];
 
-  //   setSelectedFile(file)
-
-  //   toast("Uploaded Successfully!", {
-  //     position: toast.POSITION.TOP_LEFT,
-  //     className: "foo-bar"
-  //   });
-  // }
-
-  // The Button
-  // const handleUpload = ()=> {
-  //   if(!selectedFile) {
-  //     console.error('No file selected')
-  //   }
-
-  //   try {
-  //     const pdfFile = new FormData();
-  //     FormData.append('pdf', selectedFile )
-
-  //   } catch(error) {
-  //     throw new Error
-  //   }
-  // }
 
   /**
    * Whenever we submit the prompt
@@ -140,7 +157,6 @@ function PdfSearch() {
   return (
     <>
       <ToastContainer />
-      
 
       <TwoColumnLayout
         alignment="alignment"

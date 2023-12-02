@@ -8,7 +8,8 @@ const Input = ({ handleFileChange,  fileInputRef }) => {
         onChange={handleFileChange}
         className="hidden"
         type="file"
-        accept=".jpg"
+        name="file"
+        accept=".pdf"
       />
     </>
   );

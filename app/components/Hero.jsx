@@ -1,6 +1,6 @@
 import React from "react";
 import ButtonWrapper from "./ButtonWrapper";
-import Input from "./Input"
+import Input from "./Input";
 
 const Hero = ({
   title,
@@ -29,9 +29,8 @@ const Hero = ({
         {/* Button/Input */}
         <div className="mt-10 flex">
           <Input
-          fileInputRef={fileInputRef}
+            fileInputRef={fileInputRef}
             handleFileChange={handleFileChange}
-            
           />
           <ButtonWrapper
             buttonText={buttonText}
