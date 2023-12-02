@@ -25,6 +25,7 @@ const ChatBuddy = () => {
     },
     
     
+    
   ]);
 
   const [firstMsg, setFirstMsg] = useState(true);

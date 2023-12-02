@@ -33,6 +33,12 @@ function PdfSearch() {
   // selecting file
   const [selectedFile, setSelectedFile] = useState(null);
 
+  // handle endpoint
+  const [ endPoint, setEndPoint ] = useState([
+    "/pdf-upload",
+    "/pdf-query"
+  ])
+
 
 
   /**
@@ -87,10 +93,10 @@ function PdfSearch() {
   // Get the latest data
   useEffect(() => {
     if (selectedFile) {
-      // toast("Uploaded Successfully!", {
-      //   position: toast.POSITION.TOP_LEFT,
-      //   className: "foo-bar",
-      // });
+      toast("Uploaded Successfully!", {
+        position: toast.POSITION.TOP_LEFT,
+        className: "foo-bar",
+      });
 
       console.log(selectedFile)
     }
@@ -168,6 +174,8 @@ function PdfSearch() {
               paragraph="Embark on a transformative academic journey with our decentralized AI platform, crafted exclusively for students. Revolutionize your learning experience as cutting-edge AI tools converge in a decentralized space "
               buttonText="Upload"
               display="block"
+
+              endPoint={endPoint}
               handleFileChange={handleFileChange}
               handleButtonClick={handleButtonClick}
               fileInputRef={fileInputRef}

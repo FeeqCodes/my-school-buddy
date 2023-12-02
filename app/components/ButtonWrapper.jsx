@@ -7,7 +7,6 @@ const ButtonWrapper = ({
   buttonText,
   display,
   endpoint,
-  handleSubmit,
   handleButtonClick
 }) => {
 

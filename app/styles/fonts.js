@@ -13,6 +13,7 @@ const loveYa = Love_Ya_Like_A_Sister({
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins"
 });
 
 
