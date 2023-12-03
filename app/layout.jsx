@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
       <body
         className={` ${loveYa.variable} ${corleoneDue.variable}, ${poppins.variable} `}
       >
-        <main className="text-white  max-w-[1280px] w-[95vw] m-auto ">
+        <main className="text-white  max-w-fit w-[95vw] m-auto ">
           <BackgroundMesh />
 
           

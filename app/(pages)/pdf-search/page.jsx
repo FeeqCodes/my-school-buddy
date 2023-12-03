@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import SearchBox from "../../components/SearchBox";
 import TwoColumnLayout from "../../components/TwoColumnLayout";
@@ -31,7 +31,15 @@ function PdfSearch() {
   const [firstMsg, setFirstMsg] = useState(true);
 
   // selecting file
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState();
+
+  // handle endpoint
+  const [ endPoint, setEndPoint ] = useState([
+    "/pdf-upload",
+    "/pdf-query"
+  ])
+
+
 
   /**
    * whenever the promptBox value changes
@@ -40,54 +48,77 @@ function PdfSearch() {
     setPrompt(e.target.value);
   };
 
+  
   /**
    * when we select a file
    */
-
   const fileInputRef = useRef(null);
 
   // The input
-  const handleFileChange =  (e)=> {
-    const file =  e.target.files[0];
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
 
-    setSelectedFile(file)
+    setSelectedFile(file);
 
-    toast("Uploaded Successfully!", {
-      position: toast.POSITION.TOP_LEFT,
-      className: "foo-bar"
-    });
-  }
+    // handleBackendLogic()
+  };
 
+
+  // HAndle The Logic
+  const handleBackendLogic = async () => {
+
+
+    try {
+      const data = new FormData();
+      data.set("file", selectedFile);
+
+      const response = await fetch("api/pdf-upload", {
+        method: "POST",
+        body: data,
+      });
+
+      fileInputRef.current && (fileInputRef.current.value = "");
+
+      console.log("Submitted");
+
+      // Get response from the backend
+      const searchRes = await response.json();
+      console.log(searchRes);
+
+      setError("");
+
+      if (selectedFile) {
+        toast("Uploaded Successfully!", {
+          position: toast.POSITION.TOP_LEFT,
+          className: "foo-bar",
+        });
+
+        console.log(selectedFile);
+      } 
+
+
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+
+  // Get the latest data
+  useEffect(() => {
+    // Call handleBackendLogic only if selectedFile is defined
+    if (selectedFile) {
+      handleBackendLogic();
+    }
+  }, [selectedFile]); 
+
+
+
+  // Trigger a click on the hidden file input
   const handleButtonClick = () => {
-    // Trigger a click on the hidden file input
     fileInputRef.current.click();
   };
 
-  // const handleFileChange =  (e)=> {
-  //   const file =  e.target.files[0];
 
-  //   setSelectedFile(file)
-
-  //   toast("Uploaded Successfully!", {
-  //     position: toast.POSITION.TOP_LEFT,
-  //     className: "foo-bar"
-  //   });
-  // }
-
-  // The Button
-  // const handleUpload = ()=> {
-  //   if(!selectedFile) {
-  //     console.error('No file selected')
-  //   }
-
-  //   try {
-  //     const pdfFile = new FormData();
-  //     FormData.append('pdf', selectedFile )
-
-  //   } catch(error) {
-  //     throw new Error
-  //   }
-  // }
 
   /**
    * Whenever we submit the prompt
@@ -140,7 +171,6 @@ function PdfSearch() {
   return (
     <>
       <ToastContainer />
-      
 
       <TwoColumnLayout
         alignment="alignment"
@@ -152,6 +182,8 @@ function PdfSearch() {
               paragraph="Embark on a transformative academic journey with our decentralized AI platform, crafted exclusively for students. Revolutionize your learning experience as cutting-edge AI tools converge in a decentralized space "
               buttonText="Upload"
               display="block"
+
+              endPoint={endPoint}
               handleFileChange={handleFileChange}
               handleButtonClick={handleButtonClick}
               fileInputRef={fileInputRef}

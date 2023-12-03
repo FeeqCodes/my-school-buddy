@@ -1,0 +1,57 @@
+<form onSubmit={submit}>
+  <input type="file" name="file" onChange={changeFile} ref={ref} />
+
+  <input type="submit" value="upload" />
+</form>;
+
+
+///////////////////////////////////////
+const [file, setFile] = useState({});
+const ref = useRef(null);
+
+const changeFile = async (e) => {
+  setFile(e.target.files?.[0]);
+
+  if (file) {
+    toast.success("Uploaded Successfully!", {
+      position: toast.POSITION.TOP_LEFT,
+      className: "foo-bar",
+    });
+  } else {
+    toast.error("Uploading failed", {
+      position: toast.POSITION.TOP_LEFT,
+      className: "foo-bar",
+    });
+  }
+};
+
+// console.log(file);
+
+// useEffect(() => {
+// // Check if the file is defined before performing actions
+//   if (file) {
+//     console.log('File selected:', file);
+//     // Additional actions if needed
+//   }
+// }, [file]);
+
+const submit = async (e) => {
+  e.preventDefault();
+  if (!file) return;
+  try {
+    const data = new FormData();
+    data.set("file", file);
+    const res = await fetch("api/pdf-upload", {
+      method: "POST",
+      body: data,
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+
+    ref.current && (ref.current.value = "");
+
+    console.log("SUbmitted");
+  } catch (e) {
+    console.error(e);
+  }
+};

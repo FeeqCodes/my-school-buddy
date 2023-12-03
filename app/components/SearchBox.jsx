@@ -29,7 +29,7 @@ const SearchBox = ({
     }
   }, [messages]);
 
-  const maxMsgToScroll = 2;
+  const maxMsgToScroll = 5;
 
   // console.log(messages.length);
 
