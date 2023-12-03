@@ -11,8 +11,11 @@ const SearchBox = ({
   handlePromptChange,
   handleSubmit,
   error,
-  isLoading
+  isLoading,
+  selectedFile
+  
 }) => {
+  
   const messagesContainerRef = useRef();
 
   const handleKeyDown = (e) => {
@@ -113,7 +116,7 @@ const SearchBox = ({
             </div>
             <div className=" h-full  absolute flex items-center mr-[3vw]">
               <Image
-                onClick={handleSubmit}
+                onClick={ handleSubmit }
                 width={20}
                 height={10}
                 alt=""
