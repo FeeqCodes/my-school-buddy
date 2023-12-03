@@ -41,7 +41,7 @@ export async function POST(req) {
       console.log("No docs found");
 
       return;
-    }
+    } 
 
     // chunk the file size
     const splitter = new CharacterTextSplitter({
@@ -86,23 +86,23 @@ export async function POST(req) {
     // const index = pinecone.Index("my-school-buddy");
 
 
-    const client = new Pinecone({
-      apiKey: process.env.PINECONE_API_KEY,
-      environment: process.env.PINECONE_ENVIRONMENT,
-    });
+    // const client = new Pinecone({
+    //   apiKey: process.env.PINECONE_API_KEY,
+    //   environment: process.env.PINECONE_ENVIRONMENT,
+    // });
 
     // await client.init({
       
     // });
 
-    const pineconeIndex = client.index(process.env.PINECONE_INDEX);
+    // const pineconeIndex = client.index(process.env.PINECONE_INDEX);
 
-    // upload documents
-    await PineconeStore.fromDocuments(reduceDocs, new OpenAIEmbeddings(), {
-      pineconeIndex,
-    });
+    // // upload documents
+    // await PineconeStore.fromDocuments(reduceDocs, new OpenAIEmbeddings(), {
+    //   pineconeIndex,
+    // });
 
-    console.log("Successfully uploaded to database");
+    // console.log("Successfully uploaded to database");
 
     // Return the response to the frontend
     return Response.json({ message: "File Uploaded Successfully" });
