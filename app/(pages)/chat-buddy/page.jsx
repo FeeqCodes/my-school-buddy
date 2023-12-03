@@ -94,12 +94,7 @@ const ChatBuddy = () => {
 
 
 
-  const buttonClick = async ()=> {
-    await fetch('api/chat', {
-     method: 'POST',
-     body: JSON.stringify({hello:"baba"})
-    })
-  }
+
 
 
 
@@ -132,7 +127,7 @@ const ChatBuddy = () => {
                 messages={messages}
                 prompt={prompt}
                 handlePromptChange={handlePromptChange}
-                handleSubmit={handlePromptSubmit}
+                handlePromptSubmit={handlePromptSubmit}
                 error={error}
                 isLoading={isLoading}
               />
@@ -140,9 +135,7 @@ const ChatBuddy = () => {
           </>
         }
       />
-      <div>
-        <button onClick={buttonClick}>click me</button>
-      </div>
+     
     </>
   );
 };

@@ -11,11 +11,7 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Error from "next/error";
-import {withToast} from "../../../utils/toast"
-
-
-
-
+import { withToast } from "../../../utils/toast";
 
 function PdfSearch() {
   const [prompt, setPrompt] = useState("");
@@ -33,9 +29,6 @@ function PdfSearch() {
   // selecting file
   const [selectedFile, setSelectedFile] = useState();
 
-
-
-
   /**
    * whenever the promptBox value changes
    */
@@ -43,7 +36,6 @@ function PdfSearch() {
     setPrompt(e.target.value);
   };
 
-  
   /**
    * when we select a file
    */
@@ -58,10 +50,8 @@ function PdfSearch() {
     // handleBackendLogic()
   };
 
-
   // HAndle The Logic
   const handleBackendLogic = async () => {
-
     toast("Uploading File", {
       position: toast.POSITION.TOP_LEFT,
       className: "foo-bar",
@@ -78,17 +68,13 @@ function PdfSearch() {
 
       fileInputRef.current && (fileInputRef.current.value = "");
 
-      console.log("Submitted");
+      console.log(selectedFile);
 
       // Get response from the backend
       const uploadRes = await response.json();
       console.log(uploadRes);
 
-
       setError("");
-
-    
-     
 
       if (uploadRes) {
         toast.success("Uploaded Successfully!", {
@@ -96,32 +82,6 @@ function PdfSearch() {
           className: "foo-bar",
         });
 
-        console.log(selectedFile);
-      } 
-
-
-    } catch (e) {
-      console.log(e);
-      if(e) {
-        toast.error("Uploading Failed! Please upload another Pdf", {
-          position: toast.POSITION.TOP_LEFT,
-          className: "foo-bar",
-        });
-      }
-    }
-  };
-
-  
-  
-
-  // Get the latest data
-  useEffect(() => {
-    // Call handleBackendLogic only if selectedFile is defined
-    if (selectedFile) {
-      handleBackendLogic();
-      
-
-      if(handleBackendLogic.ok){
         setMessages([
           {
             text: "Now you can ask your Questions ",
@@ -129,21 +89,34 @@ function PdfSearch() {
           },
         ]);
       }
-       
-       
-    } 
-
-    
-  }, [selectedFile]); 
 
 
+    } catch (e) {
+      console.log(e);
+      if (e) {
+        toast.error("Uploading Failed! Please upload another Pdf", {
+          position: toast.POSITION.TOP_LEFT,
+          className: "foo-bar",
+        });
+      }
+    }
+
+    setSelectedFile(null);
+    console.log(selectedFile);
+  };
+
+  // Get the latest data
+  useEffect(() => {
+    // Call handleBackendLogic only if selectedFile is defined
+    if (selectedFile) {
+      handleBackendLogic();
+    }
+  }, [selectedFile]);
 
   // Trigger a click on the hidden file input
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
-
-
 
   /**
    * Whenever we submit the prompt
@@ -158,22 +131,19 @@ function PdfSearch() {
         { text: prompt, type: "user" },
       ]);
 
-      
-
       // sending the prompt to the backend and initializing the response
-      const response = await fetch("api/chat-buddy", {
+      const response = await fetch("api/pdf-query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ input: prompt, firstMsg: firstMsg }),
+        body: JSON.stringify({ input: prompt }),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP Error! Status: ${response.status}`);
       }
 
-      // Resetting the prompt and firstMsg after response has been received
+      // Resetting the prompt  after response has been received
       setPrompt("");
-      setFirstMsg(false);
 
       // Getting the response from thr back end
       const searchRes = await response.json();
@@ -182,7 +152,10 @@ function PdfSearch() {
 
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: searchRes.output.response, type: "bot" },
+        {
+          text: searchRes.output.text,
+          type: "bot",
+        },
       ]);
 
       console.log({ searchRes });
@@ -209,7 +182,6 @@ function PdfSearch() {
               paragraph="Embark on a transformative academic journey with our decentralized AI platform, crafted exclusively for students. Revolutionize your learning experience as cutting-edge AI tools converge in a decentralized space "
               buttonText="Upload"
               display="block"
-              
               handleFileChange={handleFileChange}
               handleButtonClick={handleButtonClick}
               fileInputRef={fileInputRef}
@@ -231,7 +203,7 @@ function PdfSearch() {
                 messages={messages}
                 prompt={prompt}
                 handlePromptChange={handlePromptChange}
-                handleSubmit={()=> handleSubmit("/pdf-query")}
+                handlePromptSubmit={handlePromptSubmit}
                 error={error}
                 selectedFile={selectedFile}
                 // isLoading={isLoading}

@@ -9,10 +9,9 @@ const SearchBox = ({
   messages,
   prompt,
   handlePromptChange,
-  handleSubmit,
+  handlePromptSubmit,
   error,
   isLoading,
-  selectedFile
   
 }) => {
   
@@ -21,7 +20,7 @@ const SearchBox = ({
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
-      handleSubmit();
+      handlePromptSubmit();
     }
   };
 
@@ -116,7 +115,7 @@ const SearchBox = ({
             </div>
             <div className=" h-full  absolute flex items-center mr-[3vw]">
               <Image
-                onClick={ handleSubmit }
+                onClick={ handlePromptSubmit }
                 width={20}
                 height={10}
                 alt=""
