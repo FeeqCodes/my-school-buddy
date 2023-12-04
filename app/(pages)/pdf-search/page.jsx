@@ -12,8 +12,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Error from "next/error";
 import { withToast } from "../../../utils/toast";
+import { useRouter } from "next/navigation";
+import { useAccount } from "wagmi";
+
+
+
+
+
 
 function PdfSearch() {
+  // check is wallet is connected
+  const router = useRouter()
+  const { isConnected } = useAccount()
+
   const [prompt, setPrompt] = useState("");
   const [error, setError] = useState(null);
 
@@ -168,7 +179,12 @@ function PdfSearch() {
     }
   };
 
-  return (
+
+
+  
+  return !isConnected ? (
+    router.push("./")
+  ) : (
     <>
       <ToastContainer />
 

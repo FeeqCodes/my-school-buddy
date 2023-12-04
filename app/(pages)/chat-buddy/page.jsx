@@ -7,6 +7,8 @@ import TwoColumnLayout from "../../components/TwoColumnLayout";
 import React, { useState } from "react";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useAccount } from "wagmi";
 
 
 
@@ -14,6 +16,10 @@ import Image from "next/image";
 
 
 const ChatBuddy = () => {
+  // check is wallet is connected
+  const router = useRouter()
+  const { isConnected } = useAccount()
+
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [error, setError] = useState(null);
@@ -100,6 +106,9 @@ const ChatBuddy = () => {
 
   return (
     <>
+    {
+     !isConnected ? router.push('./') :
+
       <TwoColumnLayout
         leftChildren={
           <>
@@ -135,6 +144,7 @@ const ChatBuddy = () => {
           </>
         }
       />
+    }
      
     </>
   );

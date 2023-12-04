@@ -35,6 +35,7 @@ export async function POST(req) {
   }
 
   console.log({input})
+  
 
   const response = await chain.call({ input })
 
