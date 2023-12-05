@@ -6,7 +6,7 @@ import TwoColumnLayout from "../../components/TwoColumnLayout";
 
 import Hero from "../../components/Hero";
 import Image from "next/image";
-import Sidebar from "../../components/SIdebar";
+import Sidebar from "../../components/Sidebar";
 
 function PdfSearch() {
   const [prompt, setPrompt] = useState("");
