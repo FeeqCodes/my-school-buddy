@@ -13,7 +13,7 @@ import Error from "next/error";
 import { withToast } from "../../../utils/toast";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../components/SIdebar";
 
 function PdfSearch() {
   // check is wallet is connected
