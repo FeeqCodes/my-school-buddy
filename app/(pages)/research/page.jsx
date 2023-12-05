@@ -15,6 +15,20 @@ import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
 import Sidebar from "../../components/SIdebar";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function PdfSearch() {
   // check is wallet is connected
   const router = useRouter();
@@ -172,9 +186,17 @@ function PdfSearch() {
     }
   };
 
-  return !isConnected ? (
-    router.push("./")
-  ) : (
+
+
+  useEffect(() => {
+    if (!isConnected) {
+      router.push("./");
+    }
+  }, [isConnected]);
+
+  
+
+  return  (
     <>
       <ToastContainer />
 

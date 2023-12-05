@@ -181,10 +181,15 @@ function PdfSearch() {
 
 
 
+  useEffect(() => {
+    if(!isConnected) {
+      router.push('./')
+    }
+  }, [isConnected]);
+
+
   
-  return !isConnected ? (
-    router.push("./")
-  ) : (
+  return  (
     <>
       <ToastContainer />
 

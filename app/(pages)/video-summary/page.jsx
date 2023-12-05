@@ -180,9 +180,17 @@ function PdfSearch() {
     }
   };
 
-  return !isConnected ? (
-    router.push("./")
-  ) : (
+
+
+  useEffect(() => {
+    if (!isConnected) {
+      router.push("./");
+    }
+  }, [isConnected]);
+
+  
+
+  return  (
     <>
       <ToastContainer />
 

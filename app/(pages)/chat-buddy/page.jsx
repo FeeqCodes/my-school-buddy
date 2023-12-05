@@ -3,7 +3,7 @@
 import Hero from "../../components/Hero";
 import SearchBox from "../../components/SearchBox";
 import TwoColumnLayout from "../../components/TwoColumnLayout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -100,14 +100,18 @@ const ChatBuddy = () => {
 
 
 
-
+  useEffect(() => {
+    if (!isConnected) {
+      router.push("./");
+    }
+  }, [isConnected]);
 
 
 
   return (
     <>
     {
-     !isConnected ? router.push('./') :
+     
 
       <TwoColumnLayout
         leftChildren={
