@@ -15,6 +15,14 @@ import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
 import Sidebar from "../../components/SIdebar";
 
+
+
+
+
+
+
+
+
 function PdfSearch() {
   // check is wallet is connected
   const router = useRouter();

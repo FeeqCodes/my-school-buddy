@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/SIdebar";
 import Hero from "../components/Hero";
 import SearchBox from "../components/SearchBox";
 import TwoColumnLayout from "../components/TwoColumnLayout";
