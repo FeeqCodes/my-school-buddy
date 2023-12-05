@@ -2,13 +2,13 @@
 
 import Hero from "../../components/Hero";
 import SearchBox from "../../components/SearchBox";
-import Sidebar from "../../components/Sidebar";
 import TwoColumnLayout from "../../components/TwoColumnLayout";
 import React, { useState } from "react";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
+import Sidebar from "../../components/Sidebar";
 
 
 
