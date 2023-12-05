@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 
 import SearchBox from "../../components/SearchBox";
 import TwoColumnLayout from "../../components/TwoColumnLayout";
-import Sidebar from "../../components/Sidebar";
 import Hero from "../../components/Hero";
 import Image from "next/image";
 
@@ -14,6 +13,7 @@ import Error from "next/error";
 import { withToast } from "../../../utils/toast";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
+import Sidebar from "../../components/SIdebar";
 
 
 

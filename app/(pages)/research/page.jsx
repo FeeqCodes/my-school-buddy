@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import SearchBox from "../../components/SearchBox";
 import TwoColumnLayout from "../../components/TwoColumnLayout";
-import Sidebar from "../../components/Sidebar";
+
 import Hero from "../../components/Hero";
 import Image from "next/image";
+import Sidebar from "../../components/Sidebar";
 
 function PdfSearch() {
   const [prompt, setPrompt] = useState("");

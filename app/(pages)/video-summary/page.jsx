@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import SearchBox from "../../components/SearchBox";
 import TwoColumnLayout from "../../components/TwoColumnLayout";
-import Sidebar from "../../components/Sidebar";
+
 import Hero from "../../components/Hero";
 import Image from "next/image";
+import Sidebar from "../../components/SIdebar";
 
 function PdfSearch() {
   const [prompt, setPrompt] = useState("");
@@ -83,7 +84,7 @@ function PdfSearch() {
           <>
             <Sidebar />
             <Hero
-              title="Video Summarizer"
+              title="PDF SEARCH"
               paragraph="Embark on a transformative academic journey with our decentralized AI platform, crafted exclusively for students. Revolutionize your learning experience as cutting-edge AI tools converge in a decentralized space
               "
               buttonText="Upload"

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAccount, useDisconnect } from 'wagmi';
 
 
@@ -19,8 +19,16 @@ const Sidebar = () => {
     { src: "/assets/Home Vector.svg", href: "/" },
     { src: "/assets/write Vector.svg", href: "/chat-buddy" },
     { src: "/assets/file.png", href: "/pdf-search" },
-    { src: "/assets/profile.svg", href: "/video-summary" },
+    { src: "/assets/video-Vector.svg", href: "/video-summary" },
+    { src: "/assets/research-Vector.svg", href: "/research-agent" },
+    
   ];
+
+
+  useEffect( ()=> {
+    isConnected
+    disconnect
+  }, [isConnected, disconnect])
 
   return (
     <div
@@ -30,7 +38,7 @@ const Sidebar = () => {
     >
       <div className="rounded-[10px] w-full h-full absolute bg-[#15061B] backdrop-blur-lg blur-sm "></div>
 
-      <button disabled={!isConnected} className="absolute w-full h-full py-10 flex flex-col justify-between items-center">
+      <div className="absolute w-full h-full py-10 flex flex-col justify-between items-center">
         <div  className=" flex flex-col items-center gap-[3rem] ">
           {links.map((link) => (
             <Link 
@@ -44,18 +52,17 @@ const Sidebar = () => {
         </div>
 
         <div>
-          <button onClick={() => disconnect()} >
             <Image
-              // onClick={() => disconnect()}
+              onClick={() => disconnect()}
               height={10}
               width={30}
               alt=""
               src="/assets/dsiconnect Vector.svg"
               className="hover:scale-125 transition-all duration-300"
             />
-          </button>
+          
         </div>
-      </button>
+      </div>
     </div>
   );
 }

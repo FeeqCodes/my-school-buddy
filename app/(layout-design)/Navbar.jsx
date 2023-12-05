@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import PopUp from "../components/PopUp";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
@@ -12,7 +12,7 @@ const Navbar = () => {
   const currentPath = usePathname();
 
   const [popUp, SetPopUp] = useState(false);
-  const { open,  } = useWeb3Modal();
+  const { open, close } = useWeb3Modal();
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
 
   const handlePopUp = () => {
@@ -28,6 +28,14 @@ const Navbar = () => {
     { label: "About", href: "/About" },
     { label: "How to use", href: "", onclick: handlePopUp },
   ];
+
+
+  useEffect(() => {
+    isConnected
+    isConnecting
+  }, [isConnected, isConnecting]);
+
+
 
   return (
     <>
@@ -56,7 +64,14 @@ const Navbar = () => {
         </ul>
 
         <div>
-          {isConnected ? (
+          {!isConnected ? (
+            <button
+              onClick={() => open()}
+              className="border-solid border-[1.5px] border-white  p-2 px-6 bg-[#511781] rounded-full hover:bg-[#15061B] transition-all duration-300 "
+            >
+              {isConnecting ? "Connecting..." : "Connect wallet"}
+            </button>
+          ) : (
             <button
               // disabled
               onClick={() => open()}
@@ -64,14 +79,9 @@ const Navbar = () => {
             >
               Connected
             </button>
-          ) : (
-            <button
-              onClick={() => open()}
-              className="border-solid border-[1.5px] border-white  p-2 px-6 bg-[#511781] rounded-full hover:bg-[#15061B] transition-all duration-300 "
-            >
-              Connect wallet
-            </button>
           )}
+
+          {/* <w3m-button/> */}
         </div>
       </nav>
     </>
