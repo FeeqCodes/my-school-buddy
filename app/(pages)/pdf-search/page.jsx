@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Error from "next/error";
 import { withToast } from "../../../utils/toast";
 import { useRouter } from "next/navigation";
-import { useAccount } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
 import Sidebar from "../../components/SIdebar";
 
 
@@ -24,6 +24,7 @@ function PdfSearch() {
   // check is wallet is connected
   const router = useRouter()
   const { isConnected } = useAccount()
+  const { chain } = useNetwork();
 
   const [prompt, setPrompt] = useState("");
   const [error, setError] = useState(null);
@@ -182,10 +183,10 @@ function PdfSearch() {
 
 
   useEffect(() => {
-    if(!isConnected) {
-      router.push('./')
+    if (!isConnected || chain.id !== 80001) {
+      router.push("./");
     }
-  }, [isConnected]);
+  }, [isConnected, chain, router]);
 
 
   

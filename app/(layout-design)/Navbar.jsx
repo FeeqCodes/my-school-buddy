@@ -6,14 +6,26 @@ import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import PopUp from "../components/PopUp";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import { useAccount } from "wagmi";
+import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
+import Modal from "../components/Modal";
+
+
+
+
 
 const Navbar = () => {
   const currentPath = usePathname();
 
+
   const [popUp, SetPopUp] = useState(false);
   const { open, close } = useWeb3Modal();
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
+  const { chain } = useNetwork()
+
+  
+
+
+
 
   const handlePopUp = () => {
     if (popUp === false) {
@@ -33,12 +45,14 @@ const Navbar = () => {
   useEffect(() => {
     isConnected
     isConnecting
-  }, [isConnected, isConnecting]);
+  }, []);
 
 
 
   return (
     <>
+    <div className="relative flex justify-center">
+
       <nav className="relative flex justify-between items-center p-3 px-[40px] z-10 m-auto bg-transparent shadow-md  w-[65%] bg-black mt-5 font-loveYa rounded-full backdrop-blur-md shadow-white gap-8">
         <div>
           <Image width={100} height={100} src="/assets/Study AI.svg" alt="" />
@@ -63,7 +77,7 @@ const Navbar = () => {
           </div>
         </ul>
 
-        <div>
+        <div className="relative">
           {!isConnected ? (
             <button
               onClick={() => open()}
@@ -80,10 +94,16 @@ const Navbar = () => {
               Connected
             </button>
           )}
-
           {/* <w3m-button/> */}
+
+          {/* {chain.name} */}
+          {/* <Modal /> */}
+          
         </div>
+
       </nav>
+        <Modal />
+    </div>
     </>
   );
 };

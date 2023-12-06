@@ -55,3 +55,12 @@ const submit = async (e) => {
     console.error(e);
   }
 };
+
+
+
+
+//Hardhat
+- compile - npx hardhat compile
+- run local blockchain = npx hardhat node
+- deploy to local network = npx hardhat run --network localhost scripts/deploy.js
+- deploy to blockchain = npx hardhat run scripts/deploy.js --network <network-name>

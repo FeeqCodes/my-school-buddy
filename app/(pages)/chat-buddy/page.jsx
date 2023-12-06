@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useAccount } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
 import Sidebar from "../../components/SIdebar";
 
 
@@ -19,6 +19,7 @@ const ChatBuddy = () => {
   // check is wallet is connected
   const router = useRouter()
   const { isConnected } = useAccount()
+  const { chain } = useNetwork()
 
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
@@ -101,10 +102,10 @@ const ChatBuddy = () => {
 
 
   useEffect(() => {
-    if (!isConnected) {
+    if (!isConnected || chain.id !== 80001) {
       router.push("./");
     }
-  }, [isConnected]);
+  }, [isConnected, chain, router]);
 
 
 

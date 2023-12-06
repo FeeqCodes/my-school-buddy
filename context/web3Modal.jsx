@@ -1,17 +1,24 @@
 "use client";
 
+import { configureChains } from "wagmi";
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
 
 import { WagmiConfig } from "wagmi";
-import { arbitrum, mainnet, polygon } from "viem/chains";
+import { arbitrum, mainnet,sepolia, polygon, polygonMumbai } from "viem/chains";
+import { infuraProvider } from "@wagmi/core/providers/infura";
 
+
+
+const { chains, publicClient } = configureChains(
+  [polygonMumbai],
+  [infuraProvider({ apiKey: "dd12e526120e419d82e3e54baec3a0c3" })]
+);
 
 // 1. Get projectId at https://cloud.walletconnect.com
 const projectId = "0a882ec7cc413a9547c3f58a16fef7ac";
 
 
 
-// 2. Create wagmiConfig
 const metadata = {
   name: "Web3Modal",
   description: "Web3Modal Example",
@@ -19,12 +26,12 @@ const metadata = {
   icons: ["https://avatars.githubusercontent.com/u/37784886"],
 };
 
-
-const chains = [ polygon ];
+// 2. Create wagmiConfig
 const wagmiConfig = defaultWagmiConfig({
-   chains, 
-   projectId, 
-   metadata 
+  chains,
+  projectId,
+  metadata,
+  publicClient,
 });
 
 

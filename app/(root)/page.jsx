@@ -25,7 +25,7 @@ function Home() {
         rightChildren={
           <>
             {/* <SearchBox /> */}
-            <Image width={400} height={0} alt="" src="/assets/pngegg 2.svg" />
+            <Image width={500} height={0} alt="" src="/assets/pngegg 2.svg" />
           </>
         }
       />
