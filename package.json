@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< Updated upstream
+=======
+    "@chainlink/contracts": "^0.8.0",
+    "@chainlink/functions-toolkit": "^0.2.8",
+>>>>>>> Stashed changes
     "@pinecone-database/pinecone": "^1.1.2",
     "formidable": "^3.5.1",
     "langchain": "^0.0.197-rc.1",

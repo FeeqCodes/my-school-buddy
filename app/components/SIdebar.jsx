@@ -15,7 +15,12 @@ const Sidebar = () => {
     { src: "/assets/Home Vector.svg", href: "/" },
     { src: "/assets/write Vector.svg", href: "/chat-buddy" },
     { src: "/assets/file.png", href: "/pdf-search" },
+<<<<<<< Updated upstream
     { src: "/assets/profile.svg", href: "/video-summary" },
+=======
+    { src: "/assets/video-Vector.svg", href: "/video-summary" },
+    { src: "/assets/research-Vector.svg", href: "/chainlink-research" },
+>>>>>>> Stashed changes
   ];
 
   return (

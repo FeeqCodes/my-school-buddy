@@ -4,20 +4,65 @@ import React, { useEffect, useRef, useState } from "react";
 
 import SearchBox from "../../components/SearchBox";
 import TwoColumnLayout from "../../components/TwoColumnLayout";
-import Sidebar from "../../components/Sidebar";
 import Hero from "../../components/Hero";
 import Image from "next/image";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Error from "next/error";
-import {withToast} from "../../../utils/toast"
+import { withToast } from "../../../utils/toast";
+import { useRouter } from "next/navigation";
+import { useAccount, useContractRead, useContractReads, useContractWrite, useNetwork, usePrepareContractWrite, useWaitForTransaction } from "wagmi";
+import Sidebar from "../../components/SIdebar";
+
+import AiBuddy from "../../../data.json"
 
 
 
 
 
-function PdfSearch() {
+
+
+
+
+
+
+
+
+function Chainlink() {
+  // check is wallet is connected
+  const router = useRouter();
+  const { isConnected } = useAccount();
+  const { chain } = useNetwork();
+
+  // const [ word, setWord ] = useState()
+
+  // // Read
+  // const { data: lastRequestId } = useContractRead({
+  //   address: "0xb95C17AAB509853a663735902CfC0183cBffe6a9",
+  //   abi: AiBuddy.abi,
+  //   functionName: "lastRequestId",
+  // });   
+
+  // // Write
+  // const { config } = usePrepareContractWrite({
+  //   address: "0xb95C17AAB509853a663735902CfC0183cBffe6a9",
+  //   abi: AiBuddy,
+  //   functionName: "requestRandomWords",
+  // });
+  // const {
+  //   // data: requestRandomWords,
+  //   isLoading,
+  //   isSuccess,
+  //   write,
+  // } = useContractWrite(config);
+
+  // // Transaction
+  // // const { data, isLoading:hashIsLoading } = useWaitForTransaction({
+  // //   hash: requestRandomWords?.hash,
+  // // });
+
+
   const [prompt, setPrompt] = useState("");
   const [error, setError] = useState(null);
 
@@ -33,9 +78,6 @@ function PdfSearch() {
   // selecting file
   const [selectedFile, setSelectedFile] = useState();
 
-
-
-
   /**
    * whenever the promptBox value changes
    */
@@ -43,7 +85,6 @@ function PdfSearch() {
     setPrompt(e.target.value);
   };
 
-  
   /**
    * when we select a file
    */
@@ -58,10 +99,8 @@ function PdfSearch() {
     // handleBackendLogic()
   };
 
-
   // HAndle The Logic
   const handleBackendLogic = async () => {
-
     toast("Uploading File", {
       position: toast.POSITION.TOP_LEFT,
       className: "foo-bar",
@@ -78,17 +117,13 @@ function PdfSearch() {
 
       fileInputRef.current && (fileInputRef.current.value = "");
 
-      console.log("Submitted");
+      console.log(selectedFile);
 
       // Get response from the backend
       const uploadRes = await response.json();
       console.log(uploadRes);
 
-
       setError("");
-
-    
-     
 
       if (uploadRes) {
         toast.success("Uploaded Successfully!", {
@@ -96,32 +131,6 @@ function PdfSearch() {
           className: "foo-bar",
         });
 
-        console.log(selectedFile);
-      } 
-
-
-    } catch (e) {
-      console.log(e);
-      if(e) {
-        toast.error("Uploading Failed! Please upload another Pdf", {
-          position: toast.POSITION.TOP_LEFT,
-          className: "foo-bar",
-        });
-      }
-    }
-  };
-
-  
-  
-
-  // Get the latest data
-  useEffect(() => {
-    // Call handleBackendLogic only if selectedFile is defined
-    if (selectedFile) {
-      handleBackendLogic();
-      
-
-      if(handleBackendLogic.ok){
         setMessages([
           {
             text: "Now you can ask your Questions ",
@@ -129,16 +138,6 @@ function PdfSearch() {
           },
         ]);
       }
-       
-       
-    } 
-
-    
-  }, [selectedFile]); 
-
-
-<<<<<<< Updated upstream
-=======
     } catch (e) {
       console.log(e);
       if (e) {
@@ -155,20 +154,18 @@ function PdfSearch() {
 
   // Get the latest data
   useEffect(() => {
-    // Call handleBackendLogic only if selectedFile is defined
-    if (selectedFile) {
-      handleBackendLogic();
+    if (!isConnected || chain.id !== 80001) {
+      router.push("./");
     }
-  }, [selectedFile]);
+  }, [isConnected, chain, router]);
+
+
   
->>>>>>> Stashed changes
 
   // Trigger a click on the hidden file input
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
-
-
 
   /**
    * Whenever we submit the prompt
@@ -183,22 +180,19 @@ function PdfSearch() {
         { text: prompt, type: "user" },
       ]);
 
-      
-
       // sending the prompt to the backend and initializing the response
-      const response = await fetch("api/chat-buddy", {
+      const response = await fetch("api/pdf-query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ input: prompt, firstMsg: firstMsg }),
+        body: JSON.stringify({ input: prompt }),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP Error! Status: ${response.status}`);
       }
 
-      // Resetting the prompt and firstMsg after response has been received
+      // Resetting the prompt  after response has been received
       setPrompt("");
-      setFirstMsg(false);
 
       // Getting the response from thr back end
       const searchRes = await response.json();
@@ -207,7 +201,10 @@ function PdfSearch() {
 
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: searchRes.output.response, type: "bot" },
+        {
+          text: searchRes.output.text,
+          type: "bot",
+        },
       ]);
 
       console.log({ searchRes });
@@ -220,6 +217,16 @@ function PdfSearch() {
     }
   };
 
+
+
+  useEffect(() => {
+    if (!isConnected || chain.id !== 80001) {
+      router.push("./");
+    }
+  }, [isConnected, chain, router]);
+
+  
+
   return (
     <>
       <ToastContainer />
@@ -230,16 +237,20 @@ function PdfSearch() {
           <>
             <Sidebar />
             <Hero
-              title="PDF SEARCH"
+              title="CHAINLINK VRF"
               paragraph="Embark on a transformative academic journey with our decentralized AI platform, crafted exclusively for students. Revolutionize your learning experience as cutting-edge AI tools converge in a decentralized space "
-              buttonText="Upload"
-              endpoint='endpoint'
+              buttonText="Generate Word"
               display="block"
-              
               handleFileChange={handleFileChange}
               handleButtonClick={handleButtonClick}
               fileInputRef={fileInputRef}
             />
+
+            <div>
+              {/* <button onClick={() => write?.()}>Button</button> */}
+              {/* {data && <p>Loading</p>} */}
+              {/* <p>Words:{lastRequestId} </p> */}
+            </div>
           </>
         }
         rightChildren={
@@ -257,7 +268,7 @@ function PdfSearch() {
                 messages={messages}
                 prompt={prompt}
                 handlePromptChange={handlePromptChange}
-                handleSubmit={()=> handleSubmit("/pdf-query")}
+                handlePromptSubmit={handlePromptSubmit}
                 error={error}
                 selectedFile={selectedFile}
                 // isLoading={isLoading}
@@ -270,4 +281,4 @@ function PdfSearch() {
   );
 }
 
-export default PdfSearch;
+export default Chainlink;
