@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@chainlink/contracts": "^0.8.0",
+    "@google/generative-ai": "^0.1.2",
     "@pinecone-database/pinecone": "^1.1.2",
     "@web3modal/wagmi": "^3.4.0",
     "formidable": "^3.5.1",

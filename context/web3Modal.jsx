@@ -1,11 +1,17 @@
 "use client";
 
-import { configureChains } from "wagmi";
+import { configureChains , chain} from "wagmi";
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
 
 import { WagmiConfig } from "wagmi";
-import { arbitrum, mainnet,sepolia, polygon, polygonMumbai } from "viem/chains";
+import { arbitrum, mainnet, sepolia, polygon, polygonMumbai, areon } from "viem/chains";
 import { infuraProvider } from "@wagmi/core/providers/infura";
+
+
+
+
+
+
 
 
 
@@ -33,6 +39,7 @@ const wagmiConfig = defaultWagmiConfig({
   metadata,
   publicClient,
 });
+
 
 
 // 3. Create modal

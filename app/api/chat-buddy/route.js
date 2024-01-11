@@ -48,6 +48,29 @@ export async function POST(req) {
 
 
 
+
+
+
+
+// export function GET(res, req) {
+//   // const body = await req.json()
+//   console.log("moi")
+
+//   return NextResponse.json({hello: "world"})
+// }
+
+// export async function POST(req) {
+//     const body = await req.json() 
+//      console.log(body)
+
+//     return Response.json("hello")
+// }
+
+
+
+
+
+
 // export function GET(res, req) {
 //   // const body = await req.json()
 //   console.log("moi")
