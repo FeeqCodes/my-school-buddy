@@ -7,6 +7,8 @@ const Modal = () => {
   const { chain } = useNetwork();
   const { chains, switchNetwork, isLoading, pendingChainId } =
     useSwitchNetwork();
+    // console.log(chain) chain i am currently on
+    // console.log(chains) provider chainId
 
 
     

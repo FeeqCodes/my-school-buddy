@@ -42,7 +42,7 @@ export async function POST(req) {
   console.log(response)
 
 
-  return Response.json({output: response});
+  return Response.json({output: response,});
 }
 
 

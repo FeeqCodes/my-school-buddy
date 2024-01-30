@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Error from "next/error";
 import { withToast } from "../../../utils/toast";
 import { useRouter } from "next/navigation";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 import Sidebar from "../../components/SIdebar";
 
 
@@ -34,6 +34,8 @@ function PdfSearch() {
   const router = useRouter();
   const { isConnected } = useAccount();
   const { chain } = useNetwork();
+  const { chains } = useSwitchNetwork();
+
 
 
 
@@ -194,10 +196,10 @@ function PdfSearch() {
 
 
   useEffect(() => {
-    if (!isConnected) {
+    if (!isConnected || chain.id !== chains[0].id) {
       router.push("./");
     }
-  }, [isConnected]);
+  }, [isConnected, chain, chains, router]);
 
   
 

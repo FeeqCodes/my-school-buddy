@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 import Sidebar from "../../components/SIdebar";
 
 
@@ -20,6 +20,7 @@ const ChatBuddy = () => {
   const router = useRouter()
   const { isConnected } = useAccount()
   const { chain } = useNetwork()
+  const { chains } = useSwitchNetwork();
 
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
@@ -102,10 +103,10 @@ const ChatBuddy = () => {
 
 
   useEffect(() => {
-    if (!isConnected || chain.id !== 80001) {
+    if (!isConnected || chain.id !== chains[0].id) {
       router.push("./");
     }
-  }, [isConnected, chain, router]);
+  }, [isConnected, chain, router, chains]);
 
 
 

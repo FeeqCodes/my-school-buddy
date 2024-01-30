@@ -12,14 +12,13 @@ const SearchBox = ({
   handlePromptSubmit,
   error,
   isLoading,
-  
+  placeHolderText,
 }) => {
-  
   const messagesContainerRef = useRef();
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
+      e.preventDefault();
       handlePromptSubmit();
     }
   };
@@ -101,7 +100,6 @@ const SearchBox = ({
             )}
           </div>
 
-
           {/* Prompt search */}
           <div className=" sticky bottom-0 w-full  flex justify-end items-end ">
             <div className="w-full p-[1rem]">
@@ -110,12 +108,12 @@ const SearchBox = ({
                 onChange={handlePromptChange}
                 onKeyDown={handleKeyDown}
                 className="py-6 pl-6 pr-16 w-full h-8 rounded-[20px] border-2 border-[#CCC1C1] shadow-md shadow-[#333] text-black outline-none"
-                placeholder="Send A Message"
+                placeholder={placeHolderText || "Send A Message"}
               />
             </div>
             <div className=" h-full  absolute flex items-center mr-[3vw]">
               <Image
-                onClick={ handlePromptSubmit }
+                onClick={handlePromptSubmit}
                 width={20}
                 height={10}
                 alt=""
