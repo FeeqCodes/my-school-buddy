@@ -43,6 +43,18 @@ const [messages, setMessages] = useState([
     text: "Hi What will you like to search for today",
     type: "bot",
   },
+  // {
+  //   text: "Hi What will you like to search for today",
+  //   type: "user",
+  // },
+  // {
+  //   text: "consider options like rental properties or house flipping. However, real estate investment requires significant capital and involves its own set of risks. 9. Passive income streams: Explore potential passive income streams such as rental properties, stock dividends, royalties from books or music, or creating digital products that can generate income without continuous effort or time investment. Remember, making money is not an overnight process. It requires hard work, persistence, and adaptability. Continuously educate yourself, stay updated with market trends, and be open to new opportunities.",
+  //   type: "bot",
+  // },
+  // {
+  //   text: "consider options like rental properties or house flipping. However, real estate investment requires significant capital and involves its own set of risks. 9. Passive income streams: Explore potential passive income streams such as rental properties, stock dividends, royalties from books or music, or creating digital products that can generate income without continuous effort or time investment. Remember, making money is not an overnight process. It requires hard work, persistence, and adaptability. Continuously educate yourself, stay updated with market trends, and be open to new opportunities.",
+  //   type: "user",
+  // },
 ]);
 
 const [firstMsg, setFirstMsg] = useState(true);
@@ -74,16 +86,27 @@ const handlePromptSubmit = async () => {
     const response = await fetch("api/video-summary", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ input: prompt, firstMsg: firstMsg }),
+      body: JSON.stringify({ prompt: prompt, firstMsg: firstMsg }),
       // cache:'no-store'
     });
 
+    
+    
     if (!response.ok) {
+      
+      // set the a custom message
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: "An error occurred, please paste a valid youtube link and try agin", type: "bot" },
+      ]);
+      
+      setFirstMsg(true);
+      setIsLoading(false);
+      
       throw new Error(`HTTP Error! Status: ${response.status}`);
     }
-
-    // Resetting the prompt and firstMsg after response has been received
-
+    
+    // Resetting the Loading state after response has been received
     setFirstMsg(false);
     setIsLoading(false);
 
@@ -94,7 +117,7 @@ const handlePromptSubmit = async () => {
 
     setMessages((prevMessages) => [
       ...prevMessages,
-      { text: searchRes.output.response, type: "bot" },
+      { text: searchRes.output?.text, type: "bot" },
     ]);
 
     console.log({ searchRes });

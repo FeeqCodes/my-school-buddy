@@ -18,7 +18,7 @@ const Hero = ({
         <div className="">
           <h1
             style={{ color: "rgba(255, 255, 255, 0.72)" }}
-            className=" text-[9vw] leading-[100%] my-[2rem] font-loveYa"
+            className=" text-[5.5rem] w-auto h-auto leading-[100%] my-[2rem] font-loveYa"
           >
             {" "}
             {title}

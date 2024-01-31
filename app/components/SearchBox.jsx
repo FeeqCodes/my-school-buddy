@@ -30,7 +30,7 @@ const SearchBox = ({
     }
   }, [messages]);
 
-  const maxMsgToScroll = 5;
+  const maxMsgToScroll = 3;
 
   // console.log(messages.length);
 
@@ -38,17 +38,16 @@ const SearchBox = ({
     <>
       <form
         style={{ backgroundColor: "rgba(255, 255, 255, 0.83)" }}
-        className="font-poppins text-[16px] w-[35vw] max-w-[35vw] h-[70vh]  flex flex-col gap-5  items-end rounded-2xl  shadow-inner shadow-gray-900 text-black  overflow-clip py-1"
+        className="font-poppins text-[16px] w-[35vw] max-w-[35vw] h-[70vh]  flex flex-col gap-1  items-end rounded-2xl  shadow-inner shadow-gray-900 text-black  overflow-clip py-1"
       >
         <div
           ref={messagesContainerRef}
-          className="relative h-full w-full overflow-y-scroll"
+          className="relative h-full w-full overflow-auto "
         >
           <div
-            r
-            className={`p-[1rem] h-auto w-full flex gap-5 flex-col pb-10 ${
-              messages.length <= maxMsgToScroll && "justify-end h-full"
-            } `}
+            className={`p-[1rem]  h-full w-full flex gap-5 flex-col pb-10   ${
+              messages.length <= maxMsgToScroll && "justify-end h-auto"
+            }`}
           >
             {messages &&
               messages.map((message, index) => {
@@ -99,28 +98,27 @@ const SearchBox = ({
               </div>
             )}
           </div>
-
-          {/* Prompt search */}
-          <div className=" sticky bottom-0 w-full  flex justify-end items-end ">
-            <div className="w-full p-[1rem]">
-              <input
-                value={prompt}
-                onChange={handlePromptChange}
-                onKeyDown={handleKeyDown}
-                className="py-6 pl-6 pr-16 w-full h-8 rounded-[20px] border-2 border-[#CCC1C1] shadow-md shadow-[#333] text-black outline-none"
-                placeholder={placeHolderText || "Send A Message"}
-              />
-            </div>
-            <div className=" h-full  absolute flex items-center mr-[3vw]">
-              <Image
-                onClick={handlePromptSubmit}
-                width={20}
-                height={10}
-                alt=""
-                src="/assets/send vector.png"
-                className=" hover:cursor-pointer"
-              ></Image>
-            </div>
+        </div>
+        {/* Prompt search */}
+        <div className="sticky bottom-0 w-full  flex justify-end items-end ">
+          <div className="w-full p-[1rem]">
+            <input
+              value={prompt}
+              onChange={handlePromptChange}
+              onKeyDown={handleKeyDown}
+              className="py-6 pl-6 pr-16 w-full h-8 rounded-[20px] border-2 border-[#CCC1C1] shadow-md shadow-[#333] text-black outline-none"
+              placeholder={placeHolderText || "Send A Message"}
+            />
+          </div>
+          <div className=" h-full  absolute flex items-center mr-[3vw]">
+            <Image
+              onClick={handlePromptSubmit}
+              width={20}
+              height={10}
+              alt=""
+              src="/assets/send vector.png"
+              className=" hover:cursor-pointer"
+            ></Image>
           </div>
         </div>
       </form>

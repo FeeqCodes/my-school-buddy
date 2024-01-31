@@ -1,30 +1,53 @@
+// /pages/api/transcript.js
 import { YoutubeTranscript } from "youtube-transcript";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { ConversationalRetrievalQAChain } from "langchain/chains";
-import { HNSWLib } from "langchain/vectorstores/hnswlib";
+import { HNSWLib } from "@langchain/community/vectorstores/hnswlib";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-
-
+import { CharacterTextSplitter } from "langchain/text_splitter";
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import { MemoryVectorStore } from "langchain/vectorstores/memory";
+// import { OpenAI } from "langchain";
+import { BufferMemory } from "langchain/memory";
 
 
 // Global variables
 let chain;
 let chatHistory = [];
 
+
+
+
 const initializeChain = async (initialPrompt, transcript) => {
+  console.log("Initializing the CHain")
+
   try {
     const model = new ChatOpenAI({
       temperature: 0.8,
       modelName: "gpt-3.5-turbo",
     });
 
-    // HNSWLib
-    const vectorStore = await HNSWLib.fromDocuments(
-      [{ pageContent: transcript }],
+    const splitter = new RecursiveCharacterTextSplitter({
+      separator: " ",
+      chunkSize: 1000,
+      chunkOverlap: 3,
+    });
+
+    const docs = await splitter.createDocuments([transcript]);
+    // console.log(`Loading data ${docs[0]}`);
+     
+    // Vector Store
+    const vectorStore = await MemoryVectorStore.fromDocuments(
+      docs,
       new OpenAIEmbeddings()
     );
+    console.log("Vector STore", vectorStore)
+    
 
-    // const directory = ""
+    //await vectorStore.save(directory);
+    
+    // retrieve the vector as a file
+    // const directory = "../../../data";
     // await vectorStore.save(directory)
 
     // const loadVectorStore = await HNSWLib.load(
@@ -35,21 +58,26 @@ const initializeChain = async (initialPrompt, transcript) => {
     chain = ConversationalRetrievalQAChain.fromLLM(
       model,
       vectorStore.asRetriever(),
-      { verbose: true }
+      {
+      memory: new BufferMemory({
+        memoryKey: "chat_history", // Must be set to "chat_history"
+      }),
+    }
     );
 
     const response = await chain.call({
       question: initialPrompt,
-      chat_history: chatHistory,
     });
+    console.log("AI Response", response)
 
     chatHistory.push({
       role: "assistant",
       content: response.text,
     });
 
-    console.log({ chatHistory });
+
     return response;
+
   } catch (error) {
     console.error(error);
   }
@@ -57,62 +85,66 @@ const initializeChain = async (initialPrompt, transcript) => {
 
 
 
+export async function POST(req) {
+  console.log("in the back end")
+  const { prompt, firstMsg } = await req.json();
 
 
-export async function POST(request) {
-
-  const {prompt, firstMsg } = await request.json();
-  
-  if(firstMsg) {
+  if (firstMsg) {
     try {
-      const initialPrompt = `Give me a summary of the transcript: ${prompt}`
+      const initialPrompt = `Give me a summary of the transcript: ${prompt}`;
 
       chatHistory.push({
         role: "user",
-        content: initialPrompt
-      })
+        content: initialPrompt,
+      });
 
+      // Youtube Transcript Api
+      const transcriptResponse = await YoutubeTranscript.fetchTranscript(
+        prompt
+      );
 
-      // Youtube transcript api
-      const transcriptResponse = await YoutubeTranscript.fetchTranscript(prompt)
-
-      if(!transcriptResponse) {
-
-        return Response.json({error: "Failed to get transcript"}, {status: 400})
+      if (!transcriptResponse) {
+        return res.status(400).json({ error: "Failed to get transcript" });
       }
-      console.log(transcriptResponse)
+      console.log( transcriptResponse[1] );
 
-      let transcript  = ""
-      transcriptResponse.forEach((line)=> {
-        transcript += ""
-      })
+      // Getting only the text from the object
+      let transcript = "";
 
-      // Pass the arguments
-      const response = await initializeChain(initialPrompt, transcript)
+      transcriptResponse.forEach((line) => {
+        transcript += line.text;
+      });
+      console.log("new transcript",transcript)
 
-      // Get back response
+      const response = await initializeChain(initialPrompt, transcript);
+      // let response =  'Hello'
       return Response.json({output: response, chatHistory}, {status: 200})
 
+    } catch (err) {
+      console.error(err);
+      
+      return Response.json(
+        { error: "An error occurred while fetching transcript" },
+        { status: 400 }
+      );
 
-    } catch (error) {
-      console.error(error);
-
-      return Response.json({error: ""});
     }
 
+    
+  } else {
+    // If it's not the first message, we can chat with the bot
+      console.log("Not first Msg");
+    
+    try {
 
-  }else {
-    // if not first message
-    try{
-      console.log("received question")
       chatHistory.push({
         role: "user",
-        content: prompt
-      })
+        content: prompt,
+      });
 
       const response = await chain.call({
         question: prompt,
-        chat_history: chatHistory,
       });
 
       chatHistory.push({
@@ -120,12 +152,17 @@ export async function POST(request) {
         content: response.text,
       });
 
-      return Response.json({output: response, chatHistory}, {status: 200})
+      return Response.json({ output: response, chatHistory }, { status: 200 });
 
-    } catch(error) {
-      console.log(error)
+    } catch (error) {
+      // Generic error handling
+      console.error(error);
 
-      Response.json({error: "An error occurred"}, {status: 500})
+        return Response.json(
+          { error: "An error occurred during the conversation" },
+          { status: 500 }
+        );
     }
   }
+ 
 }

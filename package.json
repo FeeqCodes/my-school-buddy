@@ -11,6 +11,8 @@
   "dependencies": {
     "@chainlink/contracts": "^0.8.0",
     "@google/generative-ai": "^0.1.2",
+    "@langchain/community": "^0.0.23",
+    "@langchain/openai": "^0.0.13",
     "@pinecone-database/pinecone": "^1.1.2",
     "@web3modal/siwe": "^3.5.5",
     "@web3modal/wagmi": "^3.4.0",

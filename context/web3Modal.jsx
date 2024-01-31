@@ -78,7 +78,6 @@
 /**
  * Implement Aron with connectkit
  */
-
 "use client";
 
 import { WagmiConfig, createConfig } from "wagmi";
@@ -86,9 +85,11 @@ import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { sepolia } from "wagmi/chains";
 import { areon } from "../utils/customChains";
 
-const WALLETCONNECT_PROJECT_ID = "0a882ec7cc413a9547c3f58a16fef7ac";
 
-const ALCHEMY_ID = "jW560oTPUGldUqdkhl-_gAtNZMZ6jJxD";
+
+const WALLETCONNECT_PROJECT_ID = process.env.PROJECTID;
+const ALCHEMY_ID = process.env.ALCHEMY_ID;
+
 
 const config = createConfig(
   getDefaultConfig({
@@ -101,6 +102,7 @@ const config = createConfig(
     chains: [areon],
   })
 );
+
 
 export function Web3Modal({ children }) {
   return (
