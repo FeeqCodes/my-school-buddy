@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState }
 from "react";
 import LoadingDots from "./LoadingDots"
+import { motion, AnimatePresence } from "framer-motion";
 
 const SearchBox = ({
   messages,
@@ -52,30 +53,48 @@ const SearchBox = ({
             {messages &&
               messages.map((message, index) => {
                 return message.type === "bot" ? (
-                  <div key={index} className=" flex gap-3">
-                    <Image
-                      alt=""
-                      width={100}
-                      height={100}
-                      src="/assets/brain.png"
-                      className="w-[40px] h-[40px] rounded-full"
-                    />
-                    <div className="bg-white p-3  rounded-b-xl rounded-tr-xl  w-[70%] h-full">
-                      <p className="text-sm font-medium text-violet-500 mb-2">
-                        AI Buddy
-                      </p>
-                      <p>{message.text}</p>
-                    </div>
-                  </div>
+                  <AnimatePresence>
+                    <motion.div
+                      initial={{ y: 10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -10 }}
+                      transition={{ ease: "easeInOut" }}
+                      key={index}
+                      className=" flex gap-3"
+                    >
+                      <Image
+                        alt=""
+                        width={100}
+                        height={100}
+                        src="/assets/brain.png"
+                        className="w-[40px] h-[40px] rounded-full"
+                      />
+                      <div className="bg-white p-3  rounded-b-xl rounded-tr-xl  w-[70%] h-full">
+                        <p className="text-sm font-medium text-violet-500 mb-2">
+                          AI Buddy
+                        </p>
+                        <p>{message.text}</p>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
                 ) : (
-                  <div className="w-full flex justify-end " key={index}>
-                    <div className="bg-white p-3 rounded-b-xl rounded-tl-xl w-[70%]">
-                      <p className="text-sm font-medium text-violet-500 mb-2">
-                        You
-                      </p>
-                      <p>{message.text}</p>
-                    </div>
-                  </div>
+                  <AnimatePresence>
+                    <motion.div
+                      initial={{ y: 10 , opacity: 0}}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -10 }}
+                      transition={{ ease: "easeInOut" }}
+                      className="w-full flex justify-end "
+                      key={index}
+                    >
+                      <div className="bg-white p-3 rounded-b-xl rounded-tl-xl w-[70%]">
+                        <p className="text-sm font-medium text-violet-500 mb-2">
+                          You
+                        </p>
+                        <p>{message.text}</p>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
                 );
               })}
 

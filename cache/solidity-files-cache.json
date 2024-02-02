@@ -2,11 +2,11 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\Daoist\\Documents\\Work Station\\labs\\AI\\my-school-ai\\contracts\\AiBuddy.sol": {
-      "lastModificationDate": 1701818338337,
-      "contentHash": "837aad1e60909b4a665b5838617f50b0",
+      "lastModificationDate": 1706794602197,
+      "contentHash": "df9aa355e56e330f78ccdd698d1201f3",
       "sourceName": "contracts/AiBuddy.sol",
       "solcConfig": {
-        "version": "0.8.19",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -29,19 +29,15 @@
         }
       },
       "imports": [],
-      "versionPragmas": [
-        "^0.8.9"
-      ],
-      "artifacts": [
-        "AiBuddy"
-      ]
+      "versionPragmas": [],
+      "artifacts": []
     },
-    "C:\\Users\\Daoist\\Documents\\Work Station\\labs\\AI\\my-school-ai\\contracts\\Lock.sol": {
-      "lastModificationDate": 1701817466951,
-      "contentHash": "ae66265769cc28ebdaa34881df95bc5e",
-      "sourceName": "contracts/Lock.sol",
+    "C:\\Users\\Daoist\\Documents\\Work Station\\labs\\AI\\my-school-ai\\contracts\\RandomNumber.sol": {
+      "lastModificationDate": 1706794540303,
+      "contentHash": "e120d7199b37ac67d35562d34ee0684f",
+      "sourceName": "contracts/RandomNumber.sol",
       "solcConfig": {
-        "version": "0.8.19",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -65,10 +61,10 @@
       },
       "imports": [],
       "versionPragmas": [
-        "^0.8.9"
+        "^0.8.7"
       ],
       "artifacts": [
-        "Lock"
+        "RandomNumber"
       ]
     }
   }

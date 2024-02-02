@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
         className={` ${loveYa.variable} ${corleoneDue.variable}, ${poppins.variable} `}
       >
         <Web3Modal>
-          <main className="text-white  max-w-[1280px] w-[95vw] m-auto ">
+          <main className="text-white  max-w-[1400px] w-[95vw] m-auto ">
             <BackgroundMesh />
 
             <Navbar />

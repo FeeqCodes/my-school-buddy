@@ -76,7 +76,7 @@
 
 
 /**
- * Implement Aron with connectkit
+ * Implement Aron Network with connectkit
  */
 "use client";
 

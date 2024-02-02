@@ -21,13 +21,13 @@
 
 // Areon
 require("@nomicfoundation/hardhat-toolbox");
-require("@nomiclabs/hardhat-etherscan");
+// require("@nomiclabs/hardhat-etherscan");
 
 const privateKey =
   "b157c7ec2e2f76d64d9f022bee976aa0af442c20d424486ef8a4db0335d7f802";
 
 module.exports = {
-  solidity: { version: "0.8.0" },
+  solidity: { version: "0.8.7" },
   networks: {
     testnet: {
       url: `https://testnet-rpc.areon.network`,

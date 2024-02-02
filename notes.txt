@@ -1,3 +1,11 @@
+@todo
+add messages animation
+add gemini vision image reader
+add game
+
+
+
+
 <form onSubmit={submit}>
   <input type="file" name="file" onChange={changeFile} ref={ref} />
 

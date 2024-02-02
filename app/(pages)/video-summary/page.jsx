@@ -148,10 +148,9 @@ useEffect(() => {
             <Sidebar />
             <Hero
               title="VIDEO SUMMARIZER"
-              paragraph="Embark on a transformative academic journey with our decentralized AI platform, crafted exclusively for students. Revolutionize your learning experience as cutting-edge AI tools converge in a decentralized space "
+              paragraph="Introducing the YouTube Video Summarizer feature in My School Buddy – your go-to tool for efficient and personalized learning. Simply input the YouTube video URL, and our advanced summarizer will provide you with a concise summary of the video content. But it doesn't stop there – ask follow-up questions in a conversational manner to delve deeper into the material. Elevate your video learning experience with My School Buddy's YouTube Video Summarizer – making education more accessible, interactive, and tailored to your needs"
               buttonText="Upload"
               display="hidden"
-              
             />
           </>
         }

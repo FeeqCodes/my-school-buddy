@@ -190,7 +190,7 @@ function PdfSearch() {
 
 
   
-  return  (
+  return (
     <>
       <ToastContainer />
 
@@ -201,7 +201,7 @@ function PdfSearch() {
             <Sidebar />
             <Hero
               title="PDF SEARCH"
-              paragraph="Embark on a transformative academic journey with our decentralized AI platform, crafted exclusively for students. Revolutionize your learning experience as cutting-edge AI tools converge in a decentralized space "
+              paragraph="Explore the innovative PDF Search feature in My School Buddy, designed to transform your study experience effortlessly. Simply upload any PDF of your choice and start asking questions in a context that feels just like chatting with a knowledgeable friend. Say goodbye to traditional searches and welcome a new, user-friendly way to interact with your study materials. My School Buddy's PDF Search – making learning smarter and more conversational. "
               buttonText="Upload"
               display="block"
               handleFileChange={handleFileChange}
